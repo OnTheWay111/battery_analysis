@@ -9,6 +9,7 @@ class FileCreate(object):
     def __init__(self, bugreport_name):
         self.path = config.FILE_PATH
         self.bugreport_name = bugreport_name
+        self.bugreport_time_str = ''
         self.bugreport_path = os.path.join(self.path, self.bugreport_name)
         self.dump_of_batterystats_path = os.path.join(self.path, 'dump_of_batterystats.txt')
         self.processes_path = os.path.join(self.path, 'processes.txt')
@@ -54,18 +55,17 @@ class FileCreate(object):
         time_pattern_str = '\++(.*?)\s+\(+'
         time_pattern = re.compile(time_pattern_str)
         key = -1
-        bugreport_time_str = ""
         while True and len(self.dump_of_batterystats_list) > 0:
             last_line = self.dump_of_batterystats_list[key]
             # 获取wake_lock开始时间戳
-            bugreport_time_str = "".join(time_pattern.findall(last_line))
+            self.bugreport_time_str = "".join(time_pattern.findall(last_line))
             # 将时间戳转换为秒
             self.bugreport_seconds = self.seconds_value_of(last_line)
             if self.bugreport_seconds:
                 break
             else:
                 key = key - 1
-        logger.info("本次bugreport持续时长：", bugreport_time_str, "换算为秒：", self.bugreport_seconds)
+        logger.info("本次bugreport持续时长：" + str(self.bugreport_time_str) + "换算为秒：" + str(self.bugreport_seconds))
 
     # 时间戳转换为时间
     @staticmethod

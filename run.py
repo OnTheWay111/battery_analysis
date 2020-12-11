@@ -54,7 +54,8 @@ def analyze_report(app_name, pkg_name, bugreport_file):
             'app_name': app_name,
             'uid': app_info.app_uid,
             'version': pkg_version,
-            'pkg_name': pkg_name
+            'pkg_name': pkg_name,
+            'test_time': file_create.bugreport_time_str
         }
         battery_statistics = {
             'statistics': str(analyze_dump_obj.app_power_used_line).lower(),
@@ -114,11 +115,11 @@ def analyze_report(app_name, pkg_name, bugreport_file):
 
 if __name__ == "__main__":
     # <= android 6
-    # bugreport_file = "bugreport_SM9.txt"
+    bugreport_file = "bugreport_SM9.txt"
     # >= android 7
-    bugreport_file = "bugreport-2020-12-10-15-08-27.zip"
-    app_name = "wechat"
-    pkg_name = "com.tencent.mm"
+    # bugreport_file = "bugreport-2020-12-10-15-08-27.zip"
+    app_name = "cleanmaster"
+    pkg_name = "com.cleanmaster.mguard"
     app_info, battery_statistics, report_html = analyze_report(app_name, pkg_name, bugreport_file)
 
     logger.success(app_info)
