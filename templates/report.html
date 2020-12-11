@@ -28,7 +28,7 @@
         <div id="header" style="background-color:#FFA500;">
         <h1 style="margin-bottom:0;">{{ app_info.app_name }}-后台耗电报告</h1></div>
 
-        <div id="menu" style="background-color: lightgreen; height:100%; width:30%;float:left;">
+        <div id="menu" style="background-color: lightgreen; height:100%; width:40%;float:left;">
         <table border="1">
             <thead>
                 <tr>
@@ -38,7 +38,6 @@
                     <th>uid</th>
                     <th>pkgName</th>
                     <th>总电量(mA)</th>
-                    <th>测试时长</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,7 +47,6 @@
                     <td>{{ app_info.uid }}</td>
                     <td>{{ app_info.pkg_name }}</td>
                     <td>{{ battery_statistics.battery_total }}</td>
-                    <td>{{ app_info.test_time }}</td>
                 </tr>
             </tbody>
         </table>
@@ -59,6 +57,10 @@
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <td>测试时长</td>
+                    <td>{{ app_info.test_time  }}</td>
+                </tr>
                 <tr>
                     <td>耗电概要</td>
                     <td>{{ battery_statistics.statistics }}</td>
@@ -114,7 +116,7 @@
             </tbody>
         </table>
         </div>
-        <div id="report" style="background-color:#EEEEEE;height:100%;width:70%;float:left;">
+        <div id="report" style="background-color:#EEEEEE;height:100%;width:60%;float:left;">
         <iframe id="detail" align="center" width="100%" height="575px" src="{{ html_path.unqualifiedEvent }}"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
         </div>
 
