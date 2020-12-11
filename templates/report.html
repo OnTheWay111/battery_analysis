@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+    <script type="text/javascript">
+        {{ app_info }}
+        {{ battery_statistics }}
+        {{ battery_summary }}
+        {{ unqualified_event }}
+        {{ html_path }}
+
+        function showOrHide(id){
+  		var div = $("#div1").get(0);
+  		$("#div1").text(id)
+  		if(div.style.display === "block"){
+  			div.style.display = "none";
+  		}else{
+  			div.style.display = "block";
+  		}
+  	}
+   </script>
+    <meta charset="UTF-8">
+    <title>{{ app_info.app_name }}-后台耗电报告</title>
+
+</head>
+<body>
+    <div id="container" style="width:100%; height: 100%">
+        <div id="header" style="background-color:#FFA500;">
+        <h1 style="margin-bottom:0;">{{ app_info.app_name }}-后台耗电报告</h1></div>
+
+        <div id="menu" style="background-color: lightgreen; height:100%; width:30%;float:left;">
+        <table border="1">
+            <thead>
+                <tr>
+<!--                    <th colspan="2" style="background-color: azure">产品信息</th>-->
+                    <th>产品名</th>
+                    <th>版本</th>
+                    <th>uid</th>
+                    <th>pkgName</th>
+                    <th>总电量(mA)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ app_info.app_name }}</td>
+                    <td>{{ app_info.version }}</td>
+                    <td>{{ app_info.uid }}</td>
+                    <td>{{ app_info.pkg_name }}</td>
+                    <td>{{ battery_statistics.battery_total }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th colspan="3" style="background-color: azure">耗电统计</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>耗电概要</td>
+                    <td>{{ battery_statistics.statistics }}</td>
+                </tr>
+                <tr>
+                    <td>耗电百分比</td>
+                    <td>{{ battery_statistics.battery_percent }}</td>
+                </tr>
+                <tr>
+                    <td>耗电量(mA)</td>
+                    <td>{{ battery_statistics.battery_count }}</td>
+                </tr>
+                <tr>
+                    <td>网络消耗</td>
+                    <td>{{ battery_statistics.network_trffic }}</td>
+                </tr>
+                <tr>
+                    <td>不合格事件</td>
+                    <td><textarea style="background-color: red; width: 230px; height: 60px">{{ unqualified_event }}</textarea></td>
+                    <td><button id="unqualifiedEvent" class="a" value="unqualifiedEvent" name="{{ html_path.unqualifiedEvent }}" type="button">info</button></td>
+                </tr>
+                <tr>
+                    <td>耗电摘要</td>
+                    <td><textarea style="width: 230px; height: 60px">{{ battery_summary }}</textarea></td>
+                    <td><button id="batterySummary" class="a" value="batterySummary" name="{{ html_path.batterySummary }}" type="button">info</button></td>
+                </tr>
+
+                    <tr>
+                    <td>WiFi扫描(次)</td>
+                    <td>{{ battery_statistics.wifi_scans_times }}</td>
+                    <td><button id="wifiScan" class="a" value="wifiScan" name="{{ html_path.wifiScan }}" type="button">info</button></td>
+                </tr>
+                    <tr>
+                    <td>wakeUp(次)</td>
+                    <td>{{ battery_statistics.wakeup_times }}</td>
+                    <td><button id="wakeUp" class="a" value="wakeUp" name="{{ html_path.wakeUp }}" type="button">info</button></td>
+                </tr>
+                <tr>
+                    <td>wakeLock(次)</td>
+                    <td>{{ battery_statistics.wake_lock_times }}</td>
+                    <td><button id="wakeLock" class="a" value="wakeLock" name="{{ html_path.wakeLock }}" type="button">info</button></td>
+                </tr>
+                 <tr>
+                    <td>jobScheduler(次)</td>
+                    <td>{{ battery_statistics.job_scheduler_times }}</td>
+                    <td><button id="jobScheduler" class="a" value="jobScheduler" name="{{ html_path.jobScheduler }}" type="button">info</button></td>
+                </tr>
+                <tr>
+                    <td>syncManager(次)</td>
+                    <td>{{ battery_statistics.sync_manager_times }}</td>
+                    <td><button id="syncManager" class="a" value="syncManager" name="{{ html_path.syncManager }}" type="button">info</button></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <div id="report" style="background-color:#EEEEEE;height:100%;width:70%;float:left;">
+        <iframe id="detail" align="center" width="100%" height="575px" src="{{ html_path.unqualifiedEvent }}"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+        </div>
+
+        <div id="footer" style="background-color:#FFA500;clear:both;text-align:center;">
+        在路上@猎豹移动</div>
+    </div>
+</body>
+<script type="text/javascript">
+			window.onload = function () {
+				//获取class="a"的所有元素
+				var btn = $(".a");
+				//当元素被点击的时候，把其他元素的id删除掉，再把当前点击的元素加上一个id
+				btn.click(function(){
+					btn.removeAttr("id")
+					$(this).attr("id","a")
+					switch ($("#a").attr("value")){
+					    case "unqualifiedEvent":viewhtml($("#a").attr("name"));
+							break;
+					    case "batterySummary":viewhtml($("#a").attr("name"));
+							break;
+						case "wifiScan":viewhtml($("#a").attr("name"));
+							break;
+						case "wakeUp":viewhtml($("#a").attr("name"));
+							break;
+						case "wakeLock":viewhtml($("#a").attr("name"));
+							break;
+						case "jobScheduler":viewhtml($("#a").attr("name"));
+							break;
+                        case "syncManager":viewhtml($("#a").attr("name"));
+							break;
+						default:
+							break;
+					}
+				})
+				function viewhtml(s){
+					$("#report #detail").attr("src", s)
+				}
+			}
+		</script>
+</html>

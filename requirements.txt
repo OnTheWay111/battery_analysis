@@ -1,0 +1,11 @@
+certifi==2020.12.5
+chardet==3.0.4
+click==7.1.2
+csvtotable==2.1.1
+idna==2.10
+Jinja2==2.11.2
+loguru==0.5.3
+MarkupSafe==1.1.1
+six==1.15.0
+unicodecsv==0.14.1
+urllib3==1.26.2
