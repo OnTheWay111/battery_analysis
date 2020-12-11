@@ -28,7 +28,7 @@ logger.success("后台耗电报告: %s" % report_html)
 ```
 
 * 输出html报告：
-![image](https://s3.ax1x.com/2020/12/11/rACIZn.png)
+![image](https://s3.ax1x.com/2020/12/11/rAnsCd.png)
 
 * 代码结构说明
     * files: bugreport文件存放地址
